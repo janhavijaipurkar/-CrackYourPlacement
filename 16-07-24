@@ -1,0 +1,22 @@
+public class Solution {
+    public int findDuplicate(int[] nums) {
+        // Phase 1: Find the intersection point of the two runners
+        int tortoise = nums[0];
+        int hare = nums[0];
+        
+        do {
+            tortoise = nums[tortoise];
+            hare = nums[nums[hare]];
+        } while (tortoise != hare);
+        
+        // Phase 2: Find the entrance to the cycle
+        int slow = nums[0];
+        while (slow != tortoise) {
+            slow = nums[slow];
+            tortoise = nums[tortoise];
+        }
+        
+        // The duplicate number is found at the intersection point
+        return slow;
+    }
+}
